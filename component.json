@@ -1,0 +1,11 @@
+{
+  "name": "common-js",
+  "version": "0.0.1",
+  "main": "./build/common.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/commons/common.js.git"
+  },
+
+  "dependencies": {}
+}
