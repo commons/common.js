@@ -1,6 +1,11 @@
 # Common.js 
 
-A collection of common JavaScript methods. 
+Not a plugin, not a framework... Just a collection of common JavaScript methods. 
+
+Includes popular utilities: 
+* [Universal console.log](https://github.com/h5bp/html5-boilerplate/blob/master/js/plugins.js)
+* [iOS orientationchange fix](https://github.com/scottjehl/iOS-Orientationchange-Fix)
+* [mqa.js](https://github.com/peol/mqa.js)
 
 Also contains a small toolkit of fundamental operations, mapped in the "c" variable on the global namespace. 
 
