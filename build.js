@@ -26,6 +26,7 @@ concat({
 		'lib/_start.js',
 		'lib/c.query.js',
 		'lib/c.script.js',
+		'lib/c.cookie.js',
 		'lib/ios-orientationchange-fix.js',
 		'lib/universal-console.js',
 		'lib/mqa.js'

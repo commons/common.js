@@ -23,6 +23,7 @@ These methods are available in the ```window.c``` namespace:
 
 * ***query*** : Parses a query to a javascript object
 * ***script*** : Adds a new script to the DOM
+* ***cookie*** : Simplified CRUD for document.cookie
 
 
 ## Credits
