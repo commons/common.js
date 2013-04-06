@@ -21,9 +21,10 @@ bower install common.js
 
 These methods are available in the ```window.c``` namespace:
 
-* ***query*** : Parses a query to a javascript object
-* ***script*** : Adds a new script to the DOM
-* ***cookie*** : Simplified CRUD for document.cookie
+* ***query( str )*** : Parses a query to a javascript object
+* ***script( url )*** : Adds a new script to the DOM
+* ***cookie( val )*** : Simplified CRUD for document.cookie
+* ***extend({a}, {b})*** : Merging two onjects recursively
 
 
 ## Credits
