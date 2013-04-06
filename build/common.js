@@ -2,7 +2,7 @@
  * @name common.js
  * @author makesites
  * Homepage: http://github.com/commons/common.js
- * Version: 0.1.1 (Tue, 19 Mar 2013 08:28:21 GMT)
+ * Version: 0.1.2 (Sat, 06 Apr 2013 05:29:07 GMT)
  * @license MIT license
  */
  
@@ -294,6 +294,20 @@ c.cookie = (function(window, document) {
 
 
 }(window, document));
+// Object Extend method
+// Usage c.extend({...}, {...});
+c.extend = function(destination, source) {
+  for (var property in source) {
+    if (source[property] && source[property].constructor &&
+     source[property].constructor === Object) {
+      destination[property] = destination[property] || {};
+      arguments.callee(destination[property], source[property]);
+    } else {
+      destination[property] = source[property];
+    }
+  }
+  return destination;
+};
 /*! A fix for the iOS orientationchange zoom bug.
  Script by @scottjehl, rebound by @wilto.
  MIT / GPLv2 License.
