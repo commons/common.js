@@ -1,6 +1,9 @@
 # Common.js 
 
-Not a plugin, not a framework... Just a collection of common JavaScript methods. 
+Not a plugin, not a framework... Just a collection of common JavaScript methods for the client. 
+
+The scope of common.js is to persist on the rule ***"one include of the absolutely necessary"*** as a foundation to start building _any_ dependency stack.
+
 
 Includes common polyfills: 
 
