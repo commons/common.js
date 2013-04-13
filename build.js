@@ -30,7 +30,9 @@ concat({
 		'lib/c.extend.js',
 		'lib/ios-orientationchange-fix.js',
 		'lib/universal-console.js',
-		'lib/mqa.js'
+		'lib/mqa.js',
+		'lib/fastclick.js',
+		'lib/_end.js'
     ],
     dest : 'build/common.js'
 });
