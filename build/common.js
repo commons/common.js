@@ -2,7 +2,7 @@
  * @name common.js
  * @author makesites
  * Homepage: http://github.com/commons/common.js
- * Version: 0.2.2 (Sun, 12 May 2013 04:26:47 GMT)
+ * Version: 0.2.2 (Sun, 12 May 2013 05:02:37 GMT)
  * @license MIT license
  */
  
@@ -541,6 +541,8 @@ c.extend = function(destination, source) {
 	mqa.parse = function() {
 		log("Parsing CSS rules");
 		toArray(document.styleSheets).forEach(function(sheet) {
+			// exclude empty rule sets
+			if( sheet.cssRules === null ) return;
 			toArray(sheet.cssRules).forEach(function(rule) {
 				if (rule instanceof CSSMediaRule) {
 					var alias = /#-mqa-alias-(\w+)\s*?\{/.exec(rule.cssText);
