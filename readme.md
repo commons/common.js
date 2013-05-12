@@ -29,7 +29,7 @@ These methods are available in the ```window.c``` namespace:
 * ***query( str )*** : Parses a query to a javascript object
 * ***script( url )*** : Adds a new script to the DOM
 * ***cookie( val )*** : Simplified CRUD for document.cookie
-* ***extend({a}, {b})*** : Merging two onjects recursively
+* ***extend({a}, {b})*** : Merging two objects recursively
 
 
 ## Credits
