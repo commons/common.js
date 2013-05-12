@@ -2,7 +2,7 @@
  * @name common.js
  * @author makesites
  * Homepage: http://github.com/commons/common.js
- * Version: 0.2.2 (Sat, 13 Apr 2013 23:13:18 GMT)
+ * Version: 0.2.2 (Sun, 12 May 2013 04:26:47 GMT)
  * @license MIT license
  */
  
@@ -390,7 +390,7 @@ c.extend = function(destination, source) {
     }
 }());
 
-/*global CSSMediaRule, matchMedia, define*/
+/*global CSSMediaRule, matchMedia, define, console*/
 /*!
  * mqa.js
  * https://github.com/peol/mqa.js/
@@ -400,6 +400,7 @@ c.extend = function(destination, source) {
 (function(window, document) {
 	"use strict";
 
+	var DEBUG = false;
 	var callbacks = {};
 	var unbindCallbacks = {};
 	var queries = {};
@@ -424,6 +425,7 @@ c.extend = function(destination, source) {
 			if (!stack) {
 				return;
 			}
+			log("Media query triggered for alias", alias);
 			stack.forEach(function(callback) {
 				callback(mql.matches);
 			});
@@ -438,6 +440,7 @@ c.extend = function(destination, source) {
 		var mql = matchMedia(queries[alias]);
 		var cb = unbindCallbacks[alias] = createHandler(alias);
 		cb.mql = mql;
+		log("Binding", alias);
 		mql.addListener(cb);
 	}
 
@@ -448,11 +451,28 @@ c.extend = function(destination, source) {
 	function unbind(alias) {
 		var unbindCallback = unbindCallbacks[alias];
 		if (unbindCallback) {
+			log("Unbinding", alias);
 			unbindCallback.mql.removeListener(unbindCallback);
 		}
 		delete callbacks[alias];
 		delete unbindCallbacks[alias];
 	}
+//>>excludeStart("logFunction", pragmas.logFunction);
+
+	/**
+	 * Internal function used to debug mqa. Is removed when built for production. Controlled
+	 * with `DEBUG` at the top of the library.
+	 * @param {...mixed} [args] Takes undefined number of parameters, just like console.log
+	 */
+	function log() {
+		if (!DEBUG) {
+			return;
+		}
+		var args = toArray(arguments);
+		args.unshift("[mqa.js]");
+		console.log.apply(console, args);
+	}
+//>>excludeEnd("logFunction");
 
 	/**
 	 * mqa is a library that minimizes the overlap of actual
@@ -490,9 +510,7 @@ c.extend = function(destination, source) {
 	 * mqa.add("landscape", "(orientation: landscape)");
 	 */
 	mqa.add = function(alias, query) {
-		if (queries.hasOwnProperty(alias)) {
-			throw new Error("Alias already defined: " + alias);
-		}
+		log("Creating alias", alias, "with query", query);
 		queries[alias] = query;
 	};
 
@@ -507,6 +525,7 @@ c.extend = function(destination, source) {
 	 * }
 	 */
 	mqa.remove = function(alias) {
+		log("Removing alias", alias);
 		var exist = queries.hasOwnProperty(alias);
 		if (exist) {
 			unbind(alias);
@@ -520,6 +539,7 @@ c.extend = function(destination, source) {
 	 * @memberOf mqa
 	 */
 	mqa.parse = function() {
+		log("Parsing CSS rules");
 		toArray(document.styleSheets).forEach(function(sheet) {
 			toArray(sheet.cssRules).forEach(function(rule) {
 				if (rule instanceof CSSMediaRule) {
@@ -544,9 +564,6 @@ c.extend = function(destination, source) {
 	 * });
 	 */
 	mqa.on = function(alias, callback) {
-		if (!queries.hasOwnProperty(alias)) {
-			throw new Error("No such alias: " + alias);
-		}
 		var stack = callbacks[alias];
 		if (!stack) {
 			stack = [];
@@ -554,6 +571,7 @@ c.extend = function(destination, source) {
 		}
 		stack.push(callback);
 		callbacks[alias] = stack;
+		log("Added new listener on", alias, callback);
 	};
 
 	/**
@@ -577,6 +595,7 @@ c.extend = function(destination, source) {
 				unbind(alias);
 			}
 		}
+		log("Removed listener from", alias, callback);
 	};
 
 	/**
@@ -608,11 +627,7 @@ c.extend = function(destination, source) {
 	 */
 	Object.defineProperty(mqa, "queries", {
 		get: function() {
-			var copy = {};
-			Object.keys(queries).forEach(function(key) {
-				copy[key] = queries[key];
-			});
-			return copy;
+			return JSON.parse(JSON.stringify(queries));
 		}
 	});
 
