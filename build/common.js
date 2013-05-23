@@ -2,7 +2,7 @@
  * @name common.js
  * @author makesites
  * Homepage: http://github.com/commons/common.js
- * Version: 0.2.2 (Thu, 23 May 2013 08:58:23 GMT)
+ * Version: 0.2.2 (Thu, 23 May 2013 09:09:51 GMT)
  * @license MIT license
  */
  
@@ -318,7 +318,7 @@ c.extend = function(destination, source) {
 
 	var defaults = {
 		classname : 'scroll',
-		timeout: 1000
+		timeout: 500
 	};
 
 	c.scroll = function( options ){
@@ -329,6 +329,7 @@ c.extend = function(destination, source) {
 		// extend defaults
 		options = c.extend( defaults, options );
 
+		// Inspired by: http://www.html5rocks.com/en/tutorials/speed/unnecessary-paints/
 		/*
 		 * Listen for a scroll and use that to remove
 		 * the possibility of hover effects
