@@ -2,7 +2,7 @@
  * @name common.js
  * @author makesites
  * Homepage: http://github.com/commons/common.js
- * Version: 0.2.2 (Thu, 23 May 2013 08:38:34 GMT)
+ * Version: 0.2.2 (Thu, 23 May 2013 08:56:23 GMT)
  * @license MIT license
  */
  
@@ -312,12 +312,12 @@ c.extend = function(destination, source) {
 // Scroll monitoring for DOM updates
 // Usage:
 //     c.scroll();
-//     c.scroll({ classname: 'myhoverclass', timeout: 500 });
+//     c.scroll({ classname: 'myscrollclass', timeout: 500 });
 
 (function(d, c) {
 
 	var defaults = {
-		classname : 'nohover',
+		classname : 'scroll',
 		timeout: 1000
 	};
 
