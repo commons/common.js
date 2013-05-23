@@ -2,7 +2,7 @@
  * @name common.js
  * @author makesites
  * Homepage: http://github.com/commons/common.js
- * Version: 0.2.2 (Thu, 23 May 2013 09:09:51 GMT)
+ * Version: 0.2.2 (Thu, 23 May 2013 09:28:22 GMT)
  * @license MIT license
  */
  
@@ -312,7 +312,7 @@ c.extend = function(destination, source) {
 // Scroll monitoring for DOM updates
 // Usage:
 //     c.scroll();
-//     c.scroll({ classname: 'myscrollclass', timeout: 500 });
+//     c.scroll({ classname: 'myscrollclass', timeout: 1000 });
 
 (function(w, d, c) {
 
@@ -322,7 +322,7 @@ c.extend = function(destination, source) {
 	};
 
 	c.scroll = function( options ){
-		// Used to track the enabling of hover effects
+		// Used to track the enabling of scroll effects
 		var enableTimer = 0;
 		// fallbacks
 		options = options || {};
@@ -332,29 +332,29 @@ c.extend = function(destination, source) {
 		// Inspired by: http://www.html5rocks.com/en/tutorials/speed/unnecessary-paints/
 		/*
 		 * Listen for a scroll and use that to remove
-		 * the possibility of hover effects
+		 * the possibility of scroll effects
 		 */
 		w.addEventListener('scroll', function() {
 			clearTimeout(enableTimer);
-			addHoverClass();
+			addScrollClass();
 
 			// enable after 1 second, choose your own value here!
-			enableTimer = setTimeout(removeHoverClass, options.timeout);
+			enableTimer = setTimeout(removeScrollClass, options.timeout);
 		}, false);
 
 		/**
-		 * Removes the hover class from the body. Hover styles
-		 * are reliant on this class being present
+		 * Removes the scroll class from the body. Hover styles
+		 * may be reliant on this class being present
 		 */
-		function removeHoverClass() {
+		function removeScrollClass() {
 			d.body.classList.remove( options.classname );
 		}
 
 		/**
-		 * Adds the hover class to the body. Hover styles
-		 * are reliant on this class being present
+		 * Adds the scroll class to the body. Hover styles
+		 * may be reliant on this class being present
 		 */
-		function addHoverClass() {
+		function addScrollClass() {
 			d.body.classList.add( options.classname );
 		}
 
