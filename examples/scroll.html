@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Common.js - Scroll</title>
+
+	<script type="text/javascript" src="../build/common-min.js"></script>
+	<style>
+		.scrolling, .notscrolling {
+			position: fixed;
+		}
+		body {
+			height: 100000px;
+		}
+
+		body.scroll .scrolling {
+			display: block;
+		}
+
+		body.scroll .notscrolling {
+			display: none;
+		}
+
+		body:not(.scroll) .scrolling {
+			display: none;
+		}
+		body:not(.scroll) .notscrolling {
+			display: block;
+		}
+	</style>
+</head>
+
+<body>
+
+<div class="scrolling">
+	I'm scrolling
+</div>
+
+<div class="notscrolling">
+	I'm not scrolling
+</div>
+
+<script type="text/javascript">
+	// executing method with default options
+	c.scroll();
+</script>
+
+</body>
+</html>
