@@ -2,7 +2,7 @@
  * @name common.js
  * @author makesites
  * Homepage: http://github.com/commons/common.js
- * Version: 0.2.2 (Thu, 23 May 2013 08:56:23 GMT)
+ * Version: 0.2.2 (Thu, 23 May 2013 08:58:23 GMT)
  * @license MIT license
  */
  
@@ -314,7 +314,7 @@ c.extend = function(destination, source) {
 //     c.scroll();
 //     c.scroll({ classname: 'myscrollclass', timeout: 500 });
 
-(function(d, c) {
+(function(w, d, c) {
 
 	var defaults = {
 		classname : 'scroll',
@@ -333,7 +333,7 @@ c.extend = function(destination, source) {
 		 * Listen for a scroll and use that to remove
 		 * the possibility of hover effects
 		 */
-		window.addEventListener('scroll', function() {
+		w.addEventListener('scroll', function() {
 			clearTimeout(enableTimer);
 			addHoverClass();
 
@@ -359,7 +359,7 @@ c.extend = function(destination, source) {
 
 	};
 
-})(document, this.c);
+})(window, document, this.c);
 
 /*! A fix for the iOS orientationchange zoom bug.
  Script by @scottjehl, rebound by @wilto.
