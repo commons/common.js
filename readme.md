@@ -30,6 +30,7 @@ These methods are available in the ```window.c``` namespace:
 * ***script( url )*** : Adds a new script to the DOM
 * ***cookie( val )*** : Simplified CRUD for document.cookie
 * ***extend({a}, {b})*** : Merging two objects recursively
+* ***scroll( options )*** : Scroll monitoring for DOM updates
 
 
 ## Credits
