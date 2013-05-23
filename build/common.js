@@ -2,7 +2,7 @@
  * @name common.js
  * @author makesites
  * Homepage: http://github.com/commons/common.js
- * Version: 0.2.2 (Thu, 23 May 2013 06:56:02 GMT)
+ * Version: 0.2.2 (Thu, 23 May 2013 08:38:34 GMT)
  * @license MIT license
  */
  
@@ -309,29 +309,36 @@ c.extend = function(destination, source) {
   return destination;
 };
 
-// Load scripts on the fly
+// Scroll monitoring for DOM updates
 // Usage:
-//     c.script("//connect.facebook.net/en_US/all.js");
-//     c.script('http://platform.twitter.com/widgets.js', { id : 'twitter-wjs',  async : true});
+//     c.scroll();
+//     c.scroll({ classname: 'myhoverclass', timeout: 500 });
 
-(function(d) {
+(function(d, c) {
 
-	c.hover = function( classname, timeout ){
+	var defaults = {
+		classname : 'nohover',
+		timeout: 1000
+	};
+
+	c.scroll = function( options ){
 		// Used to track the enabling of hover effects
 		var enableTimer = 0;
 		// fallbacks
-		classname = classname || 'hover';
-		timeout = timeout || 1000;
+		options = options || {};
+		// extend defaults
+		options = c.extend( defaults, options );
+
 		/*
 		 * Listen for a scroll and use that to remove
 		 * the possibility of hover effects
 		 */
 		window.addEventListener('scroll', function() {
 			clearTimeout(enableTimer);
-			removeHoverClass();
+			addHoverClass();
 
 			// enable after 1 second, choose your own value here!
-			enableTimer = setTimeout(addHoverClass, timeout);
+			enableTimer = setTimeout(removeHoverClass, options.timeout);
 		}, false);
 
 		/**
@@ -339,7 +346,7 @@ c.extend = function(destination, source) {
 		 * are reliant on this class being present
 		 */
 		function removeHoverClass() {
-			document.body.classList.remove(classname);
+			d.body.classList.remove( options.classname );
 		}
 
 		/**
@@ -347,12 +354,12 @@ c.extend = function(destination, source) {
 		 * are reliant on this class being present
 		 */
 		function addHoverClass() {
-			document.body.classList.add(classname);
+			d.body.classList.add( options.classname );
 		}
 
 	};
 
-})(document);
+})(document, this.c);
 
 /*! A fix for the iOS orientationchange zoom bug.
  Script by @scottjehl, rebound by @wilto.
