@@ -1,21 +1,21 @@
 {
-    "name" : "common.js",
-    "version" : "0.2.2",
+	"name" : "common.js",
+	"version" : "0.3.0",
 	"author": "makesites",
 	"homepage" : "http://github.com/commons/common.js",
-    "devDependencies" : {
-        "commander" : "~0.5",
+	"devDependencies" : {
+		"commander" : "~0.5",
 		"jshint" : "~0.9",
-        "uglify-js2" : "~2.1",
+		"uglify-js2" : "~2.1",
 		"hbs" : "~1.0"
-    },
-    "engine" : {
-        "node" : "0.8.x"
-    }, 
+	},
+	"engine" : {
+		"node" : "0.8.x"
+	},
   "licenses": [
-    {
-      "type": "MIT license",
-      "url": "http://www.makesites.org/licenses/MIT"
-    }
+	{
+	  "type": "MIT license",
+	  "url": "http://www.makesites.org/licenses/MIT"
+	}
   ]
 }

@@ -1,11 +1,11 @@
 {
-  "name": "common.js",
-  "version": "0.2.2",
-  "main": "./build/common.js",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/commons/common.js.git"
-  },
+	"name": "common.js",
+	"version": "0.3.0",
+	"main": "./build/common-min.js",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/commons/common.js.git"
+	},
 
-  "dependencies": {}
+	"dependencies": {}
 }

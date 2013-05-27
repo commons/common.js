@@ -2,11 +2,11 @@
  * @name common.js
  * @author makesites
  * Homepage: http://github.com/commons/common.js
- * Version: 0.2.2 (Fri, 24 May 2013 07:54:23 GMT)
+ * Version: 0.3.0 (Mon, 27 May 2013 04:19:22 GMT)
  * @license MIT license
  */
- 
- // global namespace
+
+// global namespace
 var c = {};
 
 
@@ -14,24 +14,24 @@ var c = {};
 c.query = function( url ) {
 	// fallback to the window location
 	url = url || window.location.href;
-    var vars = {};
-    var parts = url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        vars[key] = value;
-    });
-    return vars;
+	var vars = {};
+	var parts = url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+		vars[key] = value;
+	});
+	return vars;
 };
 
 
 
 // Load scripts on the fly
-// Usage: 
+// Usage:
 //     c.script("//connect.facebook.net/en_US/all.js");
 //     c.script('http://platform.twitter.com/widgets.js', { id : 'twitter-wjs',  async : true});
 
 (function(d) {
-	
+
 	c.script = function( url, attr ){
-		
+
 		//fallbacks
 		attr = attr || {};
 		url = url || false;
@@ -46,16 +46,16 @@ c.query = function( url ) {
 		// clean url from protocol definition
 		url = url.replace(/^http:|^https:/, "");
 		// set attributes
-		js.type = 'text/javascript'; 
-		if( attr.id ) js.id = attr.id; 
+		js.type = 'text/javascript';
+		if( attr.id ) js.id = attr.id;
 		js.async = attr.async;
 		js.src = ("https:"==location.protocol?"https:":"http:")+ url;
 		// place in DOM
-		var s = d.getElementsByTagName(t)[0]; 
+		var s = d.getElementsByTagName(t)[0];
 		s.parentNode.insertBefore(js, s);
-	
+
 	};
-	
+
 })(document);
 
 /**
@@ -190,7 +190,7 @@ c.cookie = (function(window, document) {
 		}
 	}
 
-	// A  simplified and elegant method of setting an expires property.
+	// A  simplified and elegant method of setting an expire property.
 	function setExpiration(exp) {
 		var time = 0;
 
@@ -229,16 +229,15 @@ c.cookie = (function(window, document) {
 // Object Extend method
 // Usage c.extend({...}, {...});
 c.extend = function(destination, source) {
-  for (var property in source) {
-    if (source[property] && source[property].constructor &&
-     source[property].constructor === Object) {
-      destination[property] = destination[property] || {};
-      arguments.callee(destination[property], source[property]);
-    } else {
-      destination[property] = source[property];
-    }
-  }
-  return destination;
+	for (var property in source) {
+		if (source[property] && source[property].constructor && source[property].constructor === Object) {
+			destination[property] = destination[property] || {};
+			arguments.callee(destination[property], source[property]);
+		} else {
+			destination[property] = source[property];
+		}
+	}
+	return destination;
 };
 
 // Scroll monitoring for DOM updates
@@ -299,53 +298,53 @@ c.extend = function(destination, source) {
  MIT / GPLv2 License.
 */
 (function(w){
-	
+
 	// This fix addresses an iOS bug, so return early if the UA claims it's something else.
 	var ua = navigator.userAgent;
 	if( !( /iPhone|iPad|iPod/.test( navigator.platform ) && /OS [1-5]_[0-9_]* like Mac OS X/i.test(ua) && ua.indexOf( "AppleWebKit" ) > -1 ) ){
 		return;
 	}
 
-    var doc = w.document;
+	var doc = w.document;
 
-    if( !doc.querySelector ){ return; }
+	if( !doc.querySelector ){ return; }
 
-    var meta = doc.querySelector( "meta[name=viewport]" ),
-        initialContent = meta && meta.getAttribute( "content" ),
-        disabledZoom = initialContent + ",maximum-scale=1",
-        enabledZoom = initialContent + ",maximum-scale=10",
-        enabled = true,
+	var meta = doc.querySelector( "meta[name=viewport]" ),
+		initialContent = meta && meta.getAttribute( "content" ),
+		disabledZoom = initialContent + ",maximum-scale=1",
+		enabledZoom = initialContent + ",maximum-scale=10",
+		enabled = true,
 		x, y, z, aig;
 
-    if( !meta ){ return; }
+	if( !meta ){ return; }
 
-    function restoreZoom(){
-        meta.setAttribute( "content", enabledZoom );
-        enabled = true;
-    }
+	function restoreZoom(){
+		meta.setAttribute( "content", enabledZoom );
+		enabled = true;
+	}
 
-    function disableZoom(){
-        meta.setAttribute( "content", disabledZoom );
-        enabled = false;
-    }
-	
-    function checkTilt( e ){
+	function disableZoom(){
+		meta.setAttribute( "content", disabledZoom );
+		enabled = false;
+	}
+
+	function checkTilt( e ){
 		aig = e.accelerationIncludingGravity;
 		x = Math.abs( aig.x );
 		y = Math.abs( aig.y );
 		z = Math.abs( aig.z );
-				
+
 		// If portrait orientation and in one of the danger zones
-        if( (!w.orientation || w.orientation === 180) && ( x > 7 || ( ( z > 6 && y < 8 || z < 8 && y > 6 ) && x > 5 ) ) ){
+		if( (!w.orientation || w.orientation === 180) && ( x > 7 || ( ( z > 6 && y < 8 || z < 8 && y > 6 ) && x > 5 ) ) ){
 			if( enabled ){
 				disableZoom();
 			}
-        }
+		}
 		else if( !enabled ){
 			restoreZoom();
-        }
-    }
-	
+		}
+	}
+
 	w.addEventListener( "orientationchange", restoreZoom, false );
 	w.addEventListener( "devicemotion", checkTilt, false );
 
@@ -355,25 +354,25 @@ c.extend = function(destination, source) {
 // Source: https://github.com/h5bp/html5-boilerplate/blob/master/js/plugins.js
 // Avoid `console` errors in browsers that lack a console.
 (function() {
-    var method;
-    var noop = function () {};
-    var methods = [
-        'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
-        'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
-        'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
-        'timeStamp', 'trace', 'warn'
-    ];
-    var length = methods.length;
-    var console = (window.console = window.console || {});
+	var method;
+	var noop = function () {};
+	var methods = [
+		'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
+		'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
+		'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
+		'timeStamp', 'trace', 'warn'
+	];
+	var length = methods.length;
+	var console = (window.console = window.console || {});
 
-    while (length--) {
-        method = methods[length];
+	while (length--) {
+		method = methods[length];
 
-        // Only stub undefined methods.
-        if (!console[method]) {
-            console[method] = noop;
-        }
-    }
+		// Only stub undefined methods.
+		if (!console[method]) {
+			console[method] = noop;
+		}
+	}
 }());
 
 /*global CSSMediaRule, matchMedia, define, console*/
@@ -1338,5 +1337,5 @@ if (typeof module !== 'undefined' && module.exports) {
 // - fastclick.js
 window.addEventListener('load', function() {
 	'use strict';
-    new FastClick(document.body);
+	new FastClick(document.body);
 }, false);
