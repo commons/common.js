@@ -2,7 +2,7 @@
  * @name common.js
  * @author makesites
  * Homepage: http://github.com/commons/common.js
- * Version: 0.3.0 (Mon, 27 May 2013 04:19:22 GMT)
+ * Version: 0.3.1 (Sat, 25 Jan 2014 21:57:21 GMT)
  * @license MIT license
  */
 
