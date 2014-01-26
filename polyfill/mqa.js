@@ -65,7 +65,6 @@
 		delete callbacks[alias];
 		delete unbindCallbacks[alias];
 	}
-//>>excludeStart("logFunction", pragmas.logFunction);
 
 	/**
 	 * Internal function used to debug mqa. Is removed when built for production. Controlled
@@ -73,14 +72,15 @@
 	 * @param {...mixed} [args] Takes undefined number of parameters, just like console.log
 	 */
 	function log() {
+//>>excludeStart("logFunction", pragmas.logFunction);
 		if (!DEBUG) {
 			return;
 		}
 		var args = toArray(arguments);
 		args.unshift("[mqa.js]");
 		console.log.apply(console, args);
-	}
 //>>excludeEnd("logFunction");
+	}
 
 	/**
 	 * mqa is a library that minimizes the overlap of actual
@@ -107,7 +107,7 @@
 	 *	// `active` indicates whether the media query was activated or not
 	 * });
 	 */
-	var mqa = window.mqa = {};
+	var mqa = {};
 
 	/**
 	 * Add an aliased query that can be used programmatically.
@@ -149,10 +149,11 @@
 	mqa.parse = function() {
 		log("Parsing CSS rules");
 		toArray(document.styleSheets).forEach(function(sheet) {
-			// exclude empty rule sets
-			if( sheet.cssRules === null ) return;
+			if(sheet.cssRules === null) {
+				return;
+			}
 			toArray(sheet.cssRules).forEach(function(rule) {
-				if (rule instanceof CSSMediaRule) {
+				if (rule && rule instanceof CSSMediaRule) {
 					var alias = /#-mqa-alias-(\w+)\s*?\{/.exec(rule.cssText);
 					if (alias) {
 						mqa.add(alias[1], rule.media.mediaText);
@@ -245,5 +246,7 @@
 
 	if(typeof define === "function" && define.amd) {
 		define(mqa);
+	} else {
+		window.mqa = mqa;
 	}
 }(window, document));
