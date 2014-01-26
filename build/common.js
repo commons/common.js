@@ -2,7 +2,7 @@
  * @name common.js
  * @author makesites
  * Homepage: http://github.com/commons/common.js
- * Version: 0.3.3 (Sun, 26 Jan 2014 05:29:16 GMT)
+ * Version: 0.4.0 (Sun, 26 Jan 2014 09:02:55 GMT)
  * @license MIT license
  */
 
@@ -252,11 +252,23 @@ c.extend = function(destination, source) {
 		timeout: 500
 	};
 
-	c.scroll = function( options ){
+	c.scroll = function( a, b ){
 		// Used to track the enabling of scroll effects
 		var enableTimer = 0;
 		// fallbacks
-		options = options || {};
+		a = a || {};
+		b = b || {};
+		// cover the case of just sending a callback
+		if( typeof a == "function" ){
+			options = {};
+			callback = a;
+		} else if( typeof b == "function" ){
+			options = a;
+			callback = b;
+		} else {
+			options = a;
+			callback = false;
+		}
 		// extend defaults
 		options = c.extend( defaults, options );
 
@@ -266,6 +278,9 @@ c.extend = function(destination, source) {
 		 * the possibility of scroll effects
 		 */
 		w.addEventListener('scroll', function() {
+			// trigger callback
+			if( callback ) callback();
+			//
 			clearTimeout(enableTimer);
 			addScrollClass();
 
@@ -503,7 +518,6 @@ c.extend = function(destination, source) {
 		delete callbacks[alias];
 		delete unbindCallbacks[alias];
 	}
-//>>excludeStart("logFunction", pragmas.logFunction);
 
 	/**
 	 * Internal function used to debug mqa. Is removed when built for production. Controlled
@@ -511,14 +525,15 @@ c.extend = function(destination, source) {
 	 * @param {...mixed} [args] Takes undefined number of parameters, just like console.log
 	 */
 	function log() {
+//>>excludeStart("logFunction", pragmas.logFunction);
 		if (!DEBUG) {
 			return;
 		}
 		var args = toArray(arguments);
 		args.unshift("[mqa.js]");
 		console.log.apply(console, args);
-	}
 //>>excludeEnd("logFunction");
+	}
 
 	/**
 	 * mqa is a library that minimizes the overlap of actual
@@ -545,7 +560,7 @@ c.extend = function(destination, source) {
 	 *	// `active` indicates whether the media query was activated or not
 	 * });
 	 */
-	var mqa = window.mqa = {};
+	var mqa = {};
 
 	/**
 	 * Add an aliased query that can be used programmatically.
@@ -587,10 +602,11 @@ c.extend = function(destination, source) {
 	mqa.parse = function() {
 		log("Parsing CSS rules");
 		toArray(document.styleSheets).forEach(function(sheet) {
-			// exclude empty rule sets
-			if( sheet.cssRules === null ) return;
+			if(sheet.cssRules === null) {
+				return;
+			}
 			toArray(sheet.cssRules).forEach(function(rule) {
-				if (rule instanceof CSSMediaRule) {
+				if (rule && rule instanceof CSSMediaRule) {
 					var alias = /#-mqa-alias-(\w+)\s*?\{/.exec(rule.cssText);
 					if (alias) {
 						mqa.add(alias[1], rule.media.mediaText);
@@ -683,9 +699,10 @@ c.extend = function(destination, source) {
 
 	if(typeof define === "function" && define.amd) {
 		define(mqa);
+	} else {
+		window.mqa = mqa;
 	}
 }(window, document));
-
 /**
  * @preserve FastClick: polyfill to remove click delays on browsers with touch UIs.
  *
