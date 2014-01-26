@@ -29,6 +29,7 @@ concat({
 		'lib/c.cookie.js',
 		'lib/c.extend.js',
 		'lib/c.scroll.js',
+		'polyfill/base64.js',
 		'polyfill/ios-orientationchange-fix.js',
 		'polyfill/universal-console.js',
 		'polyfill/mqa.js',

@@ -12,6 +12,7 @@ Includes common polyfills:
 * [iOS orientationchange fix](https://github.com/scottjehl/iOS-Orientationchange-Fix)
 * [mqa.js](https://github.com/peol/mqa.js)
 * [Fastclick](https://github.com/ftlabs/fastclick)
+* [Base64.js](https://github.com/davidchambers/Base64.js)
 
 Also contains a small toolkit of fundamental operations, mapped in the "c" variable on the global namespace.
 
