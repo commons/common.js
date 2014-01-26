@@ -1,23 +1,24 @@
-# Common.js 
+# Common.js
 
-Not a plugin, not a framework... Just a collection of common JavaScript methods for the client. 
+Not a plugin, not a framework... Just a collection of common JavaScript methods for the client.
 
 The scope of common.js is to persist on the rule ***"one include of the absolutely necessary"*** as a foundation to start building _any_ dependency stack.
 
 
-Includes common polyfills: 
+Includes common polyfills:
 
+* [Modernizr](https://github.com/Modernizr/Modernizr)
 * [Universal console.log](https://github.com/h5bp/html5-boilerplate/blob/master/js/plugins.js)
 * [iOS orientationchange fix](https://github.com/scottjehl/iOS-Orientationchange-Fix)
 * [mqa.js](https://github.com/peol/mqa.js)
 * [Fastclick](https://github.com/ftlabs/fastclick)
 
-Also contains a small toolkit of fundamental operations, mapped in the "c" variable on the global namespace. 
+Also contains a small toolkit of fundamental operations, mapped in the "c" variable on the global namespace.
 
 
 ## Usage
 
-Using bower: 
+Using bower:
 ```
 bower install common.js
 ```
