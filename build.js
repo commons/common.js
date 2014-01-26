@@ -33,6 +33,7 @@ concat({
 		'polyfill/universal-console.js',
 		'polyfill/mqa.js',
 		'polyfill/fastclick.js',
+		'polyfill/modernizr.custom.js',
 		'lib/_end.js'
 	],
 	dest : 'build/common.js'
