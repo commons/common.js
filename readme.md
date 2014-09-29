@@ -5,6 +5,8 @@ Not a plugin, not a framework... Just a collection of common JavaScript methods 
 The scope of common.js is to persist on the rule ***"one include of the absolutely necessary"*** as a foundation to start building _any_ dependency stack.
 
 
+## Features
+
 Includes common polyfills:
 
 * [Modernizr](https://github.com/Modernizr/Modernizr)
@@ -17,14 +19,14 @@ Includes common polyfills:
 Also contains a small toolkit of fundamental operations, mapped in the "c" variable on the global namespace.
 
 
-## Usage
+## Install
 
 Using bower:
 ```
 bower install common.js
 ```
 
-## Common methods
+## Methods
 
 These methods are available in the ```window.c``` namespace:
 
@@ -32,16 +34,20 @@ These methods are available in the ```window.c``` namespace:
 * ***script( url )*** : Adds a new script to the DOM
 * ***cookie( val )*** : Simplified CRUD for document.cookie
 * ***extend({a}, {b})*** : Merging two objects recursively
+* ***link( url )*** : Adds a new link tag, of an HTML import or a stylesheet
 * ***scroll( options )*** : Scroll monitoring for DOM updates - [Example](http://rawgithub.com/commons/common.js/master/examples/scroll.html)
 
 
 ## Credits
 
-Created by [Makis Tracend](http://tracend.me)
+Initialized by [Makis Tracend](http://tracend.me)
 
 Part of the [Commons](http://github.com/commons) collection of web assets
 
 Distributed by [Makesites.org](http://makesites.org)
+
+
+## License
 
 Released under the [MIT license](http://makesites.org/licenses/MIT)
 
