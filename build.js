@@ -4,7 +4,7 @@ var FILE_ENCODING = 'utf-8',
 
 // Dependencies
 var _cli = require('commander'),
-	_uglify = require("uglify-js2"),
+	_uglify = require("uglify-js"),
 	_jshint = require('jshint'),
 	_handlebars = require('hbs'),
 	_fs = require('fs');
@@ -28,6 +28,7 @@ concat({
 		'lib/c.script.js',
 		'lib/c.cookie.js',
 		'lib/c.extend.js',
+		'lib/c.link.js',
 		'lib/c.scroll.js',
 		'polyfill/base64.js',
 		'polyfill/ios-orientationchange-fix.js',
