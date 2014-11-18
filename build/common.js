@@ -640,9 +640,21 @@ c.extend = function(destination, source) {
 	mqa.parse = function() {
 		log("Parsing CSS rules");
 		toArray(document.styleSheets).forEach(function(sheet) {
-			if(sheet.cssRules === null) {
-				return;
-			}
+			
+			
+			try {
+   
+    			if(sheet.cssRules === null) {
+					return;
+				}
+		  } catch(e) {
+			// Rethrow exception if it's not a SecurityError. Note that SecurityError
+			// exception is specific to Firefox.
+			if(e.name !== 'SecurityError')
+			  throw e;
+			return;
+		  }
+			
 			toArray(sheet.cssRules).forEach(function(rule) {
 				if (rule && rule instanceof CSSMediaRule) {
 					var alias = /#-mqa-alias-(\w+)\s*?\{/.exec(rule.cssText);
@@ -1536,7 +1548,7 @@ c.extend = function(destination, source) {
 	if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) {
 	
 		// AMD. Register as an anonymous module.
-		define(function() {
+		define("fastclick", function() {
 			return FastClick;
 		});
 	} else if (typeof module !== 'undefined' && module.exports) {
@@ -2377,6 +2389,12 @@ Modernizr.load=function(){yepnope.apply(window,[].slice.call(arguments,0));};
 
 // - fastclick.js
 window.addEventListener('load', function() {
-	'use strict';
-	new FastClick(document.body);
+	// 'use strict';
+	if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) {
+		require(["fastclick"], function(FastClick) {
+			new FastClick(document.body);
+		});
+	} else { 
+		new FastClick(document.body);
+	}
 }, false);
