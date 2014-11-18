@@ -149,7 +149,15 @@
 	mqa.parse = function() {
 		log("Parsing CSS rules");
 		toArray(document.styleSheets).forEach(function(sheet) {
-			if(sheet.cssRules === null) {
+			try {
+				if(sheet.cssRules === null) {
+					return;
+				}
+			} catch(e) {
+				// Rethrow exception if it's not a SecurityError. Note that SecurityError
+				// exception is specific to Firefox.
+				if(e.name !== 'SecurityError')
+					throw e;
 				return;
 			}
 			toArray(sheet.cssRules).forEach(function(rule) {
