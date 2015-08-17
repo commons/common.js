@@ -2,7 +2,7 @@
  * @name common.js
  * @author makesites
  * Homepage: http://github.com/commons/common.js
- * Version: 0.4.4 (Tue, 18 Nov 2014 13:43:01 GMT)
+ * Version: 0.5.0 (Mon, 17 Aug 2015 01:09:26 GMT)
  * @license MIT license
  */
 
@@ -503,6 +503,7 @@ c.extend = function(destination, source) {
 	var callbacks = {};
 	var unbindCallbacks = {};
 	var queries = {};
+	var origin = location.origin || location.protocol + "//" + location.hostname + (location.port ? ":" + location.port: "");
 
 	/**
 	 * Helper to convert any array-like object to an actual Array.
@@ -640,15 +641,9 @@ c.extend = function(destination, source) {
 	mqa.parse = function() {
 		log("Parsing CSS rules");
 		toArray(document.styleSheets).forEach(function(sheet) {
-			try {
-				if(sheet.cssRules === null) {
-					return;
-				}
-			} catch(e) {
-				// Rethrow exception if it's not a SecurityError. Note that SecurityError
-				// exception is specific to Firefox.
-				if(e.name !== 'SecurityError')
-					throw e;
+			var isOutsideOfDomain = sheet.href && sheet.href.indexOf("/") !== 0 && sheet.href.indexOf(origin) !== 0;
+			if(isOutsideOfDomain || sheet.cssRules === null) {
+				// ignore sheets out-of-domain or without CSS rules:
 				return;
 			}
 			toArray(sheet.cssRules).forEach(function(rule) {
@@ -748,7 +743,10 @@ c.extend = function(destination, source) {
 	} else {
 		window.mqa = mqa;
 	}
+	// save under the common namespace
+	window.c.mqa = mqa;
 }(window, document));
+
 (function () {
 	'use strict';
 
