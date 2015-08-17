@@ -12,6 +12,7 @@
 	var callbacks = {};
 	var unbindCallbacks = {};
 	var queries = {};
+	var origin = location.origin || location.protocol + "//" + location.hostname + (location.port ? ":" + location.port: "");
 
 	/**
 	 * Helper to convert any array-like object to an actual Array.
@@ -149,15 +150,9 @@
 	mqa.parse = function() {
 		log("Parsing CSS rules");
 		toArray(document.styleSheets).forEach(function(sheet) {
-			try {
-				if(sheet.cssRules === null) {
-					return;
-				}
-			} catch(e) {
-				// Rethrow exception if it's not a SecurityError. Note that SecurityError
-				// exception is specific to Firefox.
-				if(e.name !== 'SecurityError')
-					throw e;
+			var isOutsideOfDomain = sheet.href && sheet.href.indexOf("/") !== 0 && sheet.href.indexOf(origin) !== 0;
+			if(isOutsideOfDomain || sheet.cssRules === null) {
+				// ignore sheets out-of-domain or without CSS rules:
 				return;
 			}
 			toArray(sheet.cssRules).forEach(function(rule) {
