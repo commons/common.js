@@ -252,4 +252,6 @@
 	} else {
 		window.mqa = mqa;
 	}
+	// save under the common namespace
+	window.c.mqa = mqa;
 }(window, document));
