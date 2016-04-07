@@ -15,6 +15,7 @@ Includes common polyfills:
 * [mqa.js](https://github.com/peol/mqa.js)
 * [Fastclick](https://github.com/ftlabs/fastclick)
 * [Base64.js](https://github.com/davidchambers/Base64.js)
+* [CSS: background-video](https://github.com/makesites/css-background-video)
 
 Also contains a small toolkit of fundamental operations, mapped in the "c" variable on the global namespace.
 
@@ -50,4 +51,3 @@ Distributed by [Makesites.org](http://makesites.org)
 ## License
 
 Released under the [MIT license](http://makesites.org/licenses/MIT)
-
