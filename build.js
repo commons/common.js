@@ -30,6 +30,7 @@ concat({
 		'lib/c.extend.js',
 		'lib/c.link.js',
 		'lib/c.scroll.js',
+		'lib/c.visible.js',
 		'polyfill/base64.js',
 		'polyfill/ios-orientationchange-fix.js',
 		'polyfill/universal-console.js',
