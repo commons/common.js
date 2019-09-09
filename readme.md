@@ -37,6 +37,7 @@ These methods are available in the ```window.c``` namespace:
 * ***extend({a}, {b})*** : Merging two objects recursively
 * ***link( url )*** : Adds a new link tag, of an HTML import or a stylesheet
 * ***scroll( options )*** : Scroll monitoring for DOM updates - [Example](http://rawgithub.com/commons/common.js/master/examples/scroll.html)
+* ***type( variable )*** : Check the type of a variable
 * ***visible( element )*** : Minimal check if a DOM element is visible in the browser window
 
 
