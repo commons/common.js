@@ -1,6 +1,6 @@
 {
 	"name": "common.js",
-	"version": "0.5.3",
+	"version": "0.5.4",
 	"main": "./build/common-min.js",
 	"repository": {
 		"type": "git",

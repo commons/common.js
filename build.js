@@ -89,8 +89,8 @@ function uglify(srcPath, distPath) {
 	ast = pro.ast_squeeze(ast);
 	*/
 
-	var result = _uglify.minify(srcPath, { compressor: {
-		comments : true
+	var result = _uglify.minify( _fs.readFileSync(srcPath, FILE_ENCODING), { output: {
+		comments : 'some'
 	} });
 
 	_fs.writeFileSync(distPath, result.code, FILE_ENCODING);
