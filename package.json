@@ -10,7 +10,7 @@
 		"hbs": "~1.0"
 	},
 	"engine": {
-		"node": "0.8.x"
+		"node": ">12.x"
 	},
 	"licenses": [
 		{
