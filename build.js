@@ -37,7 +37,6 @@ concat({
 		'polyfill/universal-console.js',
 		'polyfill/mqa.js',
 		'polyfill/fastclick.js',
-		'polyfill/modernizr.custom.js',
 		'polyfill/css-background-video.js',
 		'lib/_end.js'
 	],
