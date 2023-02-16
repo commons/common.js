@@ -1,6 +1,6 @@
 {
 	"name": "common.js",
-	"version": "0.5.4",
+	"version": "1.0.0-alpha",
 	"author": "makesites",
 	"homepage": "http://github.com/commons/common.js",
 	"devDependencies": {
